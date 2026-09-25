@@ -310,6 +310,11 @@
   }
 
   footer{ background:var(--deep-forest); color:rgba(242,237,228,0.4); text-align:center; padding:2.4rem 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px)); border-top:1px solid rgba(200,169,110,0.15); font-size:0.7rem; }
+
+  /* Centering fixes: keep the scroll cue centered during its animation, and balance trailing letter-spacing */
+  .scroll-cue{ left:0 !important; right:0; transform:none; width:max-content; margin:0 auto; padding-left:0.32em; }
+  .hero .eyebrow{ display:inline-block; padding-left:0.34em; }
+  .hero h1{ padding-left:0.06em; }
 </style>
 </head>
 <body>
