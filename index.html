@@ -446,6 +446,65 @@
   /* Centering fixes: keep the scroll cue centered during its animation, and balance trailing letter-spacing */
   .scroll-cue{ left:0 !important; right:0; transform:none; width:max-content; margin:0 auto; padding-left:0.32em; }
   .hero .tagline{ padding-left:0.4em; }
+
+  /* ---------- The Stay ---------- */
+  .stay-grid{
+    max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap:clamp(3rem, 6vw, 6rem); align-items:center;
+  }
+  .stay-content{ text-align:left; }
+  .stay .rule{ margin:1rem 0 0; }
+  .stay-intro p{ max-width:520px; }
+
+  .stay-list{ margin-top:clamp(2.2rem, 4vw, 3rem); text-align:left; border-top:1px solid rgba(28,43,30,0.12); }
+  .stay-item{ border-bottom:1px solid rgba(28,43,30,0.12); }
+  .stay-toggle{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
+    background:none; border:0; padding:1.35rem 0; margin:0; cursor:pointer;
+    font:inherit; color:inherit; text-align:left;
+  }
+  .stay-label{
+    font-family:'Cinzel', serif; font-size:1rem; letter-spacing:0.04em; line-height:1.4;
+    color:var(--deep-forest); transition:color 0.3s ease;
+  }
+  .stay-toggle:hover .stay-label{ color:var(--ember); }
+  .stay-toggle:focus-visible{ outline:1px solid var(--golden-hour); outline-offset:4px; }
+  .stay-icon{ position:relative; flex:0 0 12px; width:12px; height:12px; }
+  .stay-icon::before, .stay-icon::after{
+    content:''; position:absolute; left:0; top:50%; width:12px; height:1px;
+    background:var(--golden-hour); transition:transform 0.4s ease;
+  }
+  .stay-icon::after{ transform:rotate(90deg); }
+  .stay-item.open .stay-icon::after{ transform:rotate(0deg); }
+  .stay-panel{ display:grid; grid-template-rows:0fr; transition:grid-template-rows 0.5s ease; }
+  .stay-item.open .stay-panel{ grid-template-rows:1fr; }
+  .stay-panel-inner{ overflow:hidden; }
+  .intro .stay-panel-inner p{ margin:0; padding:0 2.5rem 1.6rem 0; max-width:540px; }
+
+  .intro .stay-closing{
+    margin-top:clamp(2.2rem, 4vw, 3rem); font-size:1rem; line-height:1.8;
+    color:var(--deep-forest);
+  }
+  .stay-image{ overflow:hidden; line-height:0; }
+  .stay-image img{
+    width:100%; height:clamp(420px, 70vh, 640px); object-fit:cover; display:block;
+    transition:transform 0.9s cubic-bezier(0.2, 0.6, 0.3, 1);
+  }
+  @media (hover:hover) and (prefers-reduced-motion:no-preference){
+    .stay-image:hover img{ transform:scale(1.04); }
+  }
+  @media (max-width:900px){
+    .stay-grid{ grid-template-columns:1fr; gap:2.5rem; }
+    .stay-image{ order:-1; }
+    .stay-image img{ height:clamp(300px, 60vw, 440px); }
+    .stay-intro{ text-align:center; }
+    .stay .rule{ margin:1rem auto 0; }
+    .stay-intro p{ margin-left:auto; margin-right:auto; }
+    .intro .stay-closing{ text-align:center; }
+    .intro .stay-panel-inner p{ padding-right:0; }
+  }
+
 </style>
 </head>
 <body>
@@ -457,6 +516,7 @@
       <a href="#problem" data-group="idea">The Idea</a>
       <a href="#vision" data-group="seasons">The Seasons</a>
       <a href="#residences" data-group="residences">The Residences</a>
+      <a href="#stay" data-group="stay">The Stay</a>
       <a href="#design" data-group="design">Design</a>
       <a href="#involved" class="nav-cta" data-group="inquire">Inquire</a>
     </div>
@@ -524,7 +584,7 @@
         <h2>A Retreat of One's Own</h2>
         <p>Each residence stands alone, complete and private. No hallways to pass through. No neighbors to notice. Floor-to-ceiling glass connects every room to the lake or the woods just outside, so you're in the middle of the landscape without ever needing to step out into it.</p>
         <p class="amenity-subhead">Resort-Level Amenities, All to Yourself.</p>
-        <p>A king bed. A soaking tub, a steam shower, and a private heated spa, each built into the residence itself. Stone-accented bathrooms throughout, and daily housekeeping on request, so the last day feels as effortless as the first.</p>
+        <p>A king bed. A soaking tub, a steam shower, and a private heated spa, each built into the residence itself. Stone-accented bathrooms throughout.</p>
         <p style="margin-top:1.4rem; font-size:0.85rem;">An adults-only retreat by design, with select weekends set aside for families.</p>
         <div class="rule bottom"></div>
       </div>
@@ -542,6 +602,64 @@
       <img src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto/v1790290568/08-gallery-bedside_jepxxn.jpg" alt="Bedside detail in an Amíra residence, with a Michigan lakefront book and a Petoskey stone" loading="lazy">
     </figure>
   </div>
+
+  <!-- THE STAY -->
+  <section class="intro stay" id="stay">
+    <div class="stay-grid">
+    <div class="stay-content">
+      <div class="reveal stay-intro">
+        <span class="eyebrow">The Stay</span>
+        <h2>Arrival to Departure, Effortless</h2>
+        <div class="rule"></div>
+        <p>Every stay at Amíra is shaped around the guest, beginning well before arrival and lasting until it's time to leave.</p>
+      </div>
+      <div class="stay-list">
+        <div class="stay-item reveal open">
+          <button class="stay-toggle" id="stay-b1" aria-expanded="true" aria-controls="stay-p1">
+            <span class="stay-label">Before You Arrive</span><span class="stay-icon" aria-hidden="true"></span>
+          </button>
+          <div class="stay-panel" id="stay-p1" role="region" aria-labelledby="stay-b1">
+            <div class="stay-panel-inner"><p>A few questions about you, so your stay can be shaped around what you love. Then your keycard arrives in the mail, along with a note on what to expect, the services on hand, and where to eat nearby.</p></div>
+          </div>
+        </div>
+        <div class="stay-item reveal">
+          <button class="stay-toggle" id="stay-b2" aria-expanded="false" aria-controls="stay-p2">
+            <span class="stay-label">Arrival</span><span class="stay-icon" aria-hidden="true"></span>
+          </button>
+          <div class="stay-panel" id="stay-p2" role="region" aria-labelledby="stay-b2">
+            <div class="stay-panel-inner"><p>Scan your keycard and walk in. No front desk, no codes to keep track of. Just the door, and the view waiting on the other side of it.</p></div>
+          </div>
+        </div>
+        <div class="stay-item reveal">
+          <button class="stay-toggle" id="stay-b3" aria-expanded="false" aria-controls="stay-p3">
+            <span class="stay-label">Waiting for You</span><span class="stay-icon" aria-hidden="true"></span>
+          </button>
+          <div class="stay-panel" id="stay-p3" role="region" aria-labelledby="stay-b3">
+            <div class="stay-panel-inner"><p>A welcome chosen just for you, with a Michigan twist. A bottle from Traverse City, if wine is your thing. Sweet or salty, whichever you prefer. A voucher for two cookies at Tom's Mom's Cookies down the road, every stay. And a personal note, thanking you for coming.</p></div>
+          </div>
+        </div>
+        <div class="stay-item reveal">
+          <button class="stay-toggle" id="stay-b4" aria-expanded="false" aria-controls="stay-p4">
+            <span class="stay-label">Your Days</span><span class="stay-icon" aria-hidden="true"></span>
+          </button>
+          <div class="stay-panel" id="stay-p4" role="region" aria-labelledby="stay-b4">
+            <div class="stay-panel-inner"><p>Daily housekeeping on request, with fresh towels always waiting. The residence stays as fresh as the day you arrived, without you lifting a finger.</p></div>
+          </div>
+        </div>
+        <div class="stay-item reveal">
+          <button class="stay-toggle" id="stay-b5" aria-expanded="false" aria-controls="stay-p5">
+            <span class="stay-label">Departure</span><span class="stay-icon" aria-hidden="true"></span>
+          </button>
+          <div class="stay-panel" id="stay-p5" role="region" aria-labelledby="stay-b5">
+            <div class="stay-panel-inner"><p>Leave when you're ready, with optional late checkout. The last morning is yours to enjoy, not to rush.</p></div>
+          </div>
+        </div>
+      </div>
+      <p class="stay-closing reveal">Every part of the stay is designed to leave you undisturbed. And if you ever need anything, we're just a text away.</p>
+    </div>
+    <div class="stay-image"><img src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto/v1790290570/11-status-keycard_cydgiq.jpg" alt="Amíra keycard and guest folder, mailed to guests before arrival" loading="lazy"></div>
+    </div>
+  </section>
 
   <!-- THE GROUNDS (future) -->
   <div class="split reverse" id="grounds">
@@ -573,18 +691,15 @@
   </div>
 
   <!-- WHERE WE ARE -->
-  <div class="split reverse" id="status">
-    <div class="split-image"><img src="https://res.cloudinary.com/dfscbinjh/image/upload/f_auto,q_auto/v1790290570/11-status-keycard_cydgiq.jpg" alt="Amíra keycard and guest folder detail" loading="lazy"></div>
-    <div class="split-text">
-      <div class="inner reveal">
-        <span class="eyebrow">Where We Are</span>
-        <h2>A Work in Progress</h2>
-        <p>Amíra is an idea being built, not yet a finished place. The name, the design, and the residences you've seen here are real work already done, with plenty more ahead.</p>
-        <p>Right now, we're looking for investors and partners who want to help take Amíra from concept to reality.</p>
-        <div class="rule bottom"></div>
-      </div>
+  <section class="intro status" id="status">
+    <div class="section-inner reveal">
+      <span class="eyebrow">Where We Are</span>
+      <h2>A Work in Progress</h2>
+      <div class="rule"></div>
+      <p>Amíra is an idea being built, not yet a finished place. The name, the design, and the residences you've seen here are real work already done, with plenty more ahead.</p>
+      <p>Right now, we're looking for investors and partners who want to help take Amíra from concept to reality.</p>
     </div>
-  </div>
+  </section>
 
   <!-- FOUNDER'S NOTE -->
   <section class="founder" id="founder">
@@ -654,7 +769,7 @@
     const groups = {
       problem:'idea', meaning:'idea',
       vision:'seasons',
-      residences:'residences', grounds:'residences',
+      residences:'residences', stay:'stay', grounds:'stay',
       design:'design',
       status:'inquire', founder:'inquire', involved:'inquire'
     };
@@ -672,6 +787,20 @@
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting) navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
     }, { rootMargin:'-45% 0px -50% 0px' }).observe(heroEl);
+
+    // The Stay: one moment open at a time
+    const stayItems = document.querySelectorAll('.stay-item');
+    stayItems.forEach(item => {
+      const btn = item.querySelector('.stay-toggle');
+      btn.addEventListener('click', () => {
+        const willOpen = !item.classList.contains('open');
+        stayItems.forEach(other => {
+          other.classList.remove('open');
+          other.querySelector('.stay-toggle').setAttribute('aria-expanded','false');
+        });
+        if (willOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+      });
+    });
   </script>
 
 </body>
